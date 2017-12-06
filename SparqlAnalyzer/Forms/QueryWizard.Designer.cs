@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QueryWizard));
             this.wizardControl = new DevExpress.XtraWizard.WizardControl();
             this.wizardPageWelcome = new DevExpress.XtraWizard.WizardPage();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -189,6 +190,7 @@
             this.ClientSize = new System.Drawing.Size(677, 432);
             this.Controls.Add(this.wizardControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.LookAndFeel.SkinName = "Office 2016 Colorful";
             this.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Style3D;
             this.MaximizeBox = false;

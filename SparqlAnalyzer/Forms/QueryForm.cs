@@ -34,6 +34,7 @@ namespace SparqlAnalyzer.Forms
             base.OnLoad(e);
             try
             {
+                labelControlQueryString.Text = _queryData.Query;
                 progressPanel.Visible = true;
                 await PrepareView();
             }
@@ -55,7 +56,22 @@ namespace SparqlAnalyzer.Forms
             {
                 IEnumerable<ResultData> dataSource = GetResults();
                 SetDataSource(dataSource);
+                SetQueryResultCount(dataSource);
             });
+        }
+
+        private void SetQueryResultCount(IEnumerable<ResultData> dataSource)
+        {
+            if (InvokeRequired && !IsDisposed)
+            {
+                Invoke(new MethodInvoker(() =>
+                {
+                    SetQueryResultCount(dataSource);
+                }));
+                return;
+            }
+
+            labelControlResultCount.Text = dataSource.Count().ToString();
         }
 
         private void SetDataSource(IEnumerable<ResultData> dataSource)
