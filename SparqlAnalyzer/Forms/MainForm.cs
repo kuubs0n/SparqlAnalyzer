@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using DevExpress.LookAndFeel;
+using SparqlAnalyzer.General;
 
 namespace SparqlAnalyzer.Forms
 {

@@ -43,6 +43,11 @@
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.wizardPageQuery = new DevExpress.XtraWizard.WizardPage();
             this.memoEditQuery = new DevExpress.XtraEditors.MemoEdit();
+            this._panelInfo = new DevExpress.XtraEditors.PanelControl();
+            this._buttonAnalyze = new DevExpress.XtraEditors.SimpleButton();
+            this._labelErrors = new DevExpress.XtraEditors.LabelControl();
+            this._gridErrors = new DevExpress.XtraGrid.GridControl();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.wizardControl)).BeginInit();
             this.wizardControl.SuspendLayout();
@@ -53,6 +58,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.textEditLocalPath.Properties)).BeginInit();
             this.wizardPageQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.memoEditQuery.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._panelInfo)).BeginInit();
+            this._panelInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._gridErrors)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -169,6 +178,8 @@
             // 
             this.wizardPageQuery.AllowNext = false;
             this.wizardPageQuery.Controls.Add(this.memoEditQuery);
+            this.wizardPageQuery.Controls.Add(this._panelInfo);
+            this.wizardPageQuery.Controls.Add(this._gridErrors);
             this.wizardPageQuery.Name = "wizardPageQuery";
             this.wizardPageQuery.Size = new System.Drawing.Size(617, 265);
             this.wizardPageQuery.Text = "Zapytanie SPARQL";
@@ -179,9 +190,64 @@
             this.memoEditQuery.EditValue = "SELECT * WHERE {  ?sub ?pre ?term. } LIMIT 10";
             this.memoEditQuery.Location = new System.Drawing.Point(0, 0);
             this.memoEditQuery.Name = "memoEditQuery";
-            this.memoEditQuery.Size = new System.Drawing.Size(617, 265);
+            this.memoEditQuery.Size = new System.Drawing.Size(617, 111);
             this.memoEditQuery.TabIndex = 0;
             this.memoEditQuery.EditValueChanged += new System.EventHandler(this.memoEditQuery_EditValueChanged);
+            // 
+            // _panelInfo
+            // 
+            this._panelInfo.Appearance.BackColor = System.Drawing.Color.White;
+            this._panelInfo.Appearance.Options.UseBackColor = true;
+            this._panelInfo.Controls.Add(this._buttonAnalyze);
+            this._panelInfo.Controls.Add(this._labelErrors);
+            this._panelInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this._panelInfo.Location = new System.Drawing.Point(0, 111);
+            this._panelInfo.Name = "_panelInfo";
+            this._panelInfo.Size = new System.Drawing.Size(617, 39);
+            this._panelInfo.TabIndex = 2;
+            // 
+            // _buttonAnalyze
+            // 
+            this._buttonAnalyze.Image = global::SparqlAnalyzer.Properties.Resources.spellcheckasyoutype_16x16;
+            this._buttonAnalyze.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this._buttonAnalyze.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this._buttonAnalyze.Location = new System.Drawing.Point(541, 5);
+            this._buttonAnalyze.Name = "_buttonAnalyze";
+            this._buttonAnalyze.Size = new System.Drawing.Size(71, 29);
+            this._buttonAnalyze.TabIndex = 11;
+            this._buttonAnalyze.Text = "Analizuj";
+            this._buttonAnalyze.Click += new System.EventHandler(this._buttonAnalyze_Click);
+            // 
+            // _labelErrors
+            // 
+            this._labelErrors.Location = new System.Drawing.Point(13, 12);
+            this._labelErrors.Name = "_labelErrors";
+            this._labelErrors.Size = new System.Drawing.Size(110, 13);
+            this._labelErrors.TabIndex = 0;
+            this._labelErrors.Text = "Lista błędów zapytania";
+            // 
+            // _gridErrors
+            // 
+            this._gridErrors.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this._gridErrors.Location = new System.Drawing.Point(0, 150);
+            this._gridErrors.MainView = this.gridView1;
+            this._gridErrors.Name = "_gridErrors";
+            this._gridErrors.Size = new System.Drawing.Size(617, 115);
+            this._gridErrors.TabIndex = 1;
+            this._gridErrors.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView1});
+            // 
+            // gridView1
+            // 
+            this.gridView1.GridControl = this._gridErrors;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.ReadOnly = true;
+            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView1.OptionsSelection.EnableAppearanceFocusedRow = false;
+            this.gridView1.OptionsView.ShowColumnHeaders = false;
+            this.gridView1.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.OptionsView.ShowIndicator = false;
             // 
             // QueryWizard
             // 
@@ -210,6 +276,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.textEditLocalPath.Properties)).EndInit();
             this.wizardPageQuery.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.memoEditQuery.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._panelInfo)).EndInit();
+            this._panelInfo.ResumeLayout(false);
+            this._panelInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._gridErrors)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
             this.ResumeLayout(false);
 
@@ -231,5 +302,10 @@
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraWizard.WizardPage wizardPageQuery;
         private DevExpress.XtraEditors.MemoEdit memoEditQuery;
+        private DevExpress.XtraEditors.PanelControl _panelInfo;
+        private DevExpress.XtraEditors.LabelControl _labelErrors;
+        private DevExpress.XtraGrid.GridControl _gridErrors;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraEditors.SimpleButton _buttonAnalyze;
     }
 }

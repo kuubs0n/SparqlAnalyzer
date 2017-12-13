@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using SparqlAnalyzer.General;
 
 namespace SparqlAnalyzer.Forms
 {
@@ -110,6 +111,27 @@ namespace SparqlAnalyzer.Forms
                 wizardControl.SelectedPage.AllowFinish = true;
             else
                 wizardControl.SelectedPage.AllowFinish = false;
+        }
+
+        private void AnalyzeQuery()
+        {
+            QueryAnalizer queryAnalizer = new QueryAnalizer(SparqlQuery);
+            AnalyzeResult analyzeResults = queryAnalizer.AnalyzeQuery();
+
+            if (!analyzeResults.IsCorrectQuery)
+            {
+                _buttonAnalyze.Image = SparqlAnalyzer.Properties.Resources.cancel_16x16;
+                _gridErrors.DataSource = analyzeResults.ErrorMessages;
+            }
+            else
+            {
+                _buttonAnalyze.Image = SparqlAnalyzer.Properties.Resources.apply_16x16;
+            }
+        }
+
+        private void _buttonAnalyze_Click(object sender, EventArgs e)
+        {
+            AnalyzeQuery();
         }
     }
 }

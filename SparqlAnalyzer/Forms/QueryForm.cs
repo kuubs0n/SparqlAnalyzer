@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
+using SparqlAnalyzer.General;
 using VDS.RDF;
 using VDS.RDF.Parsing;
 using VDS.RDF.Query;
