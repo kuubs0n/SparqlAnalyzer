@@ -3,22 +3,52 @@ using System.Text.RegularExpressions;
 
 namespace SparqlAnalyzer.General
 {
+
+    public struct QueryRule
+    {
+        public string startQuery, ruleRegex, errorMessage;
+
+        public QueryRule(string startQuery, string ruleRegex, string errorMessage)
+        {
+            this.startQuery = startQuery;
+            this.ruleRegex = ruleRegex;
+            this.errorMessage = errorMessage;
+        }
+    }
+
+
     public class QueryAnalizer
     {
-        private readonly IDictionary<string, string> _queryRules = new Dictionary<string, string>
+        private readonly QueryRule[] _queryRules = new QueryRule[7]
         {
-            {@"^.*(select|ask|construct|describe).*$", "Missing query type eg. select in query"},
-            {@"^.*select\s+(\*\s+|\?[a-z0-9]+).*$", "Missing item?"},
-            {@"^\s*((select|ask|construct).+where|describe.+where?).*$", "Missing where in query"},
-            {@"^.+where\s+\{.*\}.*$", "Missing quarters in where"},
-            {
-                @"^.+where\s+\{\s*(\<[a-zA-Z0-9]+\>\s+|[a-zA-Z0-9]*:[a-zA-Z0-9]+\s+|(\$|\?)[a-zA-Z0-9]+\s*){3}\.?\s*\}.*",
-                "Incorrect triples"
-            },
-            {
-                @"^.+where\s+\{\s+(\<[a-zA-Z0-9]+\>\s+|[a-zA-Z0-9]*:[a-zA-Z0-9]+\s+|(\$|\?)?[a-zA-Z0-9]+\s+){3}\s*\;\s+(\<[a-zA-Z0-9]+\>\s+|[a-zA-Z0-9]*:[a-zA-Z0-9]+\s+|(\$|\?)?[a-zA-Z0-9]+\s+){2}\}.*$",
-                "Character „;” is used for triples with common subject. Use „.” for separated triples or after „;” write only predicate and object"
-            }
+           new QueryRule(@"^.*$",
+                @"^.*(select|ask|construct|describe).*$",
+                "Missing query type eg. select in query"),
+
+           new QueryRule(@"^.*select.*$",
+               @"^.*select\s+(\*\s+|\?[a-z0-9]+).*$",
+               "Missing item?"),
+
+           new QueryRule(@"^\s*((select|ask|construct).*$",
+               @"^\s*((select|ask|construct).+where|describe.+where?).*$",
+               "Missing where in query"),
+
+         new QueryRule(@"^.+where.*$",
+             @"^.+where\s+\{.*\}.*$",
+             "Missing quarters in where"),
+
+         new QueryRule(@"^.+where\s+\{\s*(\<[a-zA-Z0-9]+\>\s+|[a-zA-Z0-9]*:[a-zA-Z0-9]+\s+|(\$|\?)[a-zA-Z0-9]+\s*.*$)",
+             @"^.+where\s+\{\s*(\<[a-zA-Z0-9]+\>\s+|[a-zA-Z0-9]*:[a-zA-Z0-9]+\s+|(\$|\?)[a-zA-Z0-9]+\s*){3}\.?\s*\}.*",
+                "Incorrect triples"),
+
+         new QueryRule(@"^.+where\s+\{\s+(\<[a-zA-Z0-9]+\>\s+|[a-zA-Z0-9]*:[a-zA-Z0-9]+\s+|(\$|\?)?[a-zA-Z0-9] +\s+){3}\s*\;.*$",
+             @"^.+where\s+\{\s+(\<[a-zA-Z0-9]+\>\s+|[a-zA-Z0-9]*:[a-zA-Z0-9]+\s+|(\$|\?)?[a-zA-Z0-9]+\s+){3}\s*\;\s+(\<[a-zA-Z0-9]+\>\s+|[a-zA-Z0-9]*:[a-zA-Z0-9]+\s+|(\$|\?)?[a-zA-Z0-9]+\s+){2}(\;\s+(\<[a-zA-Z0-9]+\>\s+|[a-zA-Z0-9]*:[a-zA-Z0-9]+\s+|(\$|\?)?[a-zA-Z0-9]+\s+){2})*\}.*$",
+                "Character „;” is used for triples with common subject. Use „.” for separated triples or after „;” write only predicate and object"),
+
+         new QueryRule(@"^.*(\<[a-zA-Z0-9]+\>\s+|[a-zA-Z0-9]*:[a-zA-Z0-9]+\s+|(\$|\?)?[a-zA-Z0-9] +\s+){2,3}\s*\,.*$",
+             @"^.*(\<[a-zA-Z0-9]+\>\s+|[a-zA-Z0-9]*:[a-zA-Z0-9]+\s+|(\$|\?)?[a-zA-Z0-9] +\s+){2,3}\s*\,\s+(\<[a-zA-Z0-9]+\>\s+|[a-zA-Z0-9]*:[a-zA-Z0-9]+\s+|(\$|\?)?[a-zA-Z0-9]+\s+)(\,\s+(\<[a-zA-Z0-9]+\>\s+|[a-zA-Z0-9]*:[a-zA-Z0-9]+\s+|(\$|\?)?[a-zA-Z0-9]+\s+)*\.\}.*$",
+                "Character „,” is used for triples with common subject and predicate. Use „.” for separated triples or after „,” write only object")
+
         };
 
         private readonly string _query;
@@ -33,12 +63,15 @@ namespace SparqlAnalyzer.General
             AnalyzeResult results = new AnalyzeResult();
             ICollection<string> errorMessages = new List<string>();
 
-            foreach (KeyValuePair<string, string> rule in _queryRules)
+            foreach (QueryRule rule in _queryRules)
             {
-                if (!Regex.IsMatch(_query, rule.Key))
+                if (Regex.IsMatch(_query, rule.startQuery))
                 {
-                    results.IsCorrectQuery = false;
-                    errorMessages.Add(rule.Value);
+                    if (!Regex.IsMatch(_query, rule.ruleRegex))
+                    {
+                        results.IsCorrectQuery = false;
+                        errorMessages.Add(rule.errorMessage);
+                    }
                 }
             }
             results.ErrorMessages = errorMessages;
