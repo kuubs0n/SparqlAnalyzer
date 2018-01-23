@@ -126,6 +126,7 @@ namespace SparqlAnalyzer.Forms
             else
             {
                 _buttonAnalyze.Image = SparqlAnalyzer.Properties.Resources.apply_16x16;
+                _gridErrors.DataSource = new object[] { };
             }
         }
 

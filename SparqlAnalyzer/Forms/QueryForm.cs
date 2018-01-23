@@ -163,6 +163,7 @@ namespace SparqlAnalyzer.Forms
             }
             catch (RdfQueryException queryEx)
             {
+                ;
             }
             catch (RdfParseException parseEx)
             {
@@ -174,6 +175,10 @@ namespace SparqlAnalyzer.Forms
                     }));
                 }
                 XtraMessageBox.Show(this, "Błąd zapytania SPARQL\r\n" + parseEx.Message);
+            }
+            catch (Exception ex)
+            {
+                ;
             }
 
             return null;
