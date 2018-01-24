@@ -28,7 +28,7 @@ namespace SparqlAnalyzer.Forms
             QueryWizard queryWizard = new QueryWizard();
             DialogResult dialogResult = queryWizard.ShowDialog(this);
 
-            if (dialogResult == DialogResult.OK)
+            if (dialogResult == DialogResult.OK || dialogResult == DialogResult.Yes)
             {
                 if (queryWizard.LocalRdf)
                 {

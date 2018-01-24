@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,8 +9,6 @@ using SparqlAnalyzer.General;
 using VDS.RDF;
 using VDS.RDF.Parsing;
 using VDS.RDF.Query;
-using VDS.RDF.Query.Datasets;
-using VDS.RDF.Writing.Formatting;
 
 namespace SparqlAnalyzer.Forms
 {
@@ -52,7 +46,7 @@ namespace SparqlAnalyzer.Forms
 
         private Task PrepareView()
         {
-            ChangeColumnCaption();
+            //ChangeColumnCaption();
             return Task.Run(() =>
             {
                 IEnumerable<ResultData> dataSource = GetResults();

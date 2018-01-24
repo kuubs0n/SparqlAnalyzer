@@ -41,6 +41,9 @@
             this.simpleButtonLocalization = new DevExpress.XtraEditors.SimpleButton();
             this.textEditLocalPath = new DevExpress.XtraEditors.TextEdit();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.wizardPageBasicQuery = new DevExpress.XtraWizard.WizardPage();
+            this._panelControl = new DevExpress.XtraEditors.XtraScrollableControl();
+            this.hyperlinkLabelControl1 = new DevExpress.XtraEditors.HyperlinkLabelControl();
             this.wizardPageQuery = new DevExpress.XtraWizard.WizardPage();
             this.memoEditQuery = new DevExpress.XtraEditors.MemoEdit();
             this._panelInfo = new DevExpress.XtraEditors.PanelControl();
@@ -56,6 +59,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.textEditUrl.Properties)).BeginInit();
             this.wizardPageRdfFile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEditLocalPath.Properties)).BeginInit();
+            this.wizardPageBasicQuery.SuspendLayout();
+            this._panelControl.SuspendLayout();
             this.wizardPageQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.memoEditQuery.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._panelInfo)).BeginInit();
@@ -70,6 +75,7 @@
             this.wizardControl.Controls.Add(this.wizardPageWelcome);
             this.wizardControl.Controls.Add(this.wizardPageRdfUrl);
             this.wizardControl.Controls.Add(this.wizardPageRdfFile);
+            this.wizardControl.Controls.Add(this.wizardPageBasicQuery);
             this.wizardControl.Controls.Add(this.wizardPageQuery);
             this.wizardControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.wizardControl.Location = new System.Drawing.Point(0, 0);
@@ -78,10 +84,12 @@
             this.wizardPageWelcome,
             this.wizardPageRdfUrl,
             this.wizardPageRdfFile,
+            this.wizardPageBasicQuery,
             this.wizardPageQuery});
             this.wizardControl.Size = new System.Drawing.Size(677, 432);
             this.wizardControl.Text = "Kreator SPARQL";
             this.wizardControl.WizardStyle = DevExpress.XtraWizard.WizardStyle.WizardAero;
+            this.wizardControl.FinishClick += new System.ComponentModel.CancelEventHandler(this.wizardControl_FinishClick);
             this.wizardControl.NextClick += new DevExpress.XtraWizard.WizardCommandButtonClickEventHandler(this.wizardControl_NextClick);
             // 
             // wizardPageWelcome
@@ -160,6 +168,7 @@
             // 
             // textEditLocalPath
             // 
+            this.textEditLocalPath.EditValue = "C:\\Users\\Kuubs0n\\Desktop\\rdfexample.rdf";
             this.textEditLocalPath.Location = new System.Drawing.Point(73, 57);
             this.textEditLocalPath.Name = "textEditLocalPath";
             this.textEditLocalPath.Size = new System.Drawing.Size(502, 20);
@@ -173,6 +182,33 @@
             this.labelControl3.Size = new System.Drawing.Size(55, 13);
             this.labelControl3.TabIndex = 0;
             this.labelControl3.Text = "Lokalizacja:";
+            // 
+            // wizardPageBasicQuery
+            // 
+            this.wizardPageBasicQuery.Controls.Add(this._panelControl);
+            this.wizardPageBasicQuery.DescriptionText = "";
+            this.wizardPageBasicQuery.Name = "wizardPageBasicQuery";
+            this.wizardPageBasicQuery.Size = new System.Drawing.Size(617, 265);
+            this.wizardPageBasicQuery.Text = "Podstawowe zapytanie SPARQL";
+            // 
+            // _panelControl
+            // 
+            this._panelControl.Controls.Add(this.hyperlinkLabelControl1);
+            this._panelControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._panelControl.Location = new System.Drawing.Point(0, 0);
+            this._panelControl.Name = "_panelControl";
+            this._panelControl.Size = new System.Drawing.Size(617, 265);
+            this._panelControl.TabIndex = 0;
+            // 
+            // hyperlinkLabelControl1
+            // 
+            this.hyperlinkLabelControl1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.hyperlinkLabelControl1.Location = new System.Drawing.Point(480, 0);
+            this.hyperlinkLabelControl1.Name = "hyperlinkLabelControl1";
+            this.hyperlinkLabelControl1.Size = new System.Drawing.Size(106, 13);
+            this.hyperlinkLabelControl1.TabIndex = 1;
+            this.hyperlinkLabelControl1.Text = "Zaawansowane query";
+            this.hyperlinkLabelControl1.Click += new System.EventHandler(this.hyperlinkLabelControl1_Click);
             // 
             // wizardPageQuery
             // 
@@ -274,6 +310,9 @@
             this.wizardPageRdfFile.ResumeLayout(false);
             this.wizardPageRdfFile.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEditLocalPath.Properties)).EndInit();
+            this.wizardPageBasicQuery.ResumeLayout(false);
+            this._panelControl.ResumeLayout(false);
+            this._panelControl.PerformLayout();
             this.wizardPageQuery.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.memoEditQuery.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._panelInfo)).EndInit();
@@ -307,5 +346,8 @@
         private DevExpress.XtraGrid.GridControl _gridErrors;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraEditors.SimpleButton _buttonAnalyze;
+        private DevExpress.XtraWizard.WizardPage wizardPageBasicQuery;
+        private DevExpress.XtraEditors.XtraScrollableControl _panelControl;
+        private DevExpress.XtraEditors.HyperlinkLabelControl hyperlinkLabelControl1;
     }
 }

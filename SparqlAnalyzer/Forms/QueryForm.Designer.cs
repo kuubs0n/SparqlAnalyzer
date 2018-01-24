@@ -76,7 +76,6 @@
             // 
             // gridColumn1
             // 
-            this.gridColumn1.Caption = "gridColumn1";
             this.gridColumn1.FieldName = "Value1";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
@@ -84,7 +83,6 @@
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "gridColumn2";
             this.gridColumn2.FieldName = "Value2";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
@@ -92,7 +90,6 @@
             // 
             // gridColumn3
             // 
-            this.gridColumn3.Caption = "gridColumn3";
             this.gridColumn3.FieldName = "Value3";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
